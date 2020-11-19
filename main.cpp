@@ -14,14 +14,20 @@ int main(){
     while(1){
         cout << "\n\n1. Cambiar nombre del usuario" << "\t";
         cout << "2. Agregar Civ" << "\t";
-        cout << "2. Mostrar" << "\t";
+        cout << "3. Insertar" << "\t";
+        cout << "4. Inicializar" << endl;
+        cout << "5. Primera Civ" << endl;
+        cout << "6. Ultima Civ";
+        cout << "7. Ordenar" << "\t";
+        cout << "8. Eliminar" << "\t";
+        cout << "9. Buscar" << endl;
         cout << "3. Respaldad" << endl;
         cout << "4. Recuperar" << "\t";
-        cout << "5. Insertar" << "\t";
-        cout << "6. Inicializar" << endl;
-        cout << "7. Eliminar" << "\t";
-        cout << "8. Ordenar" << "\t";
-        cout << "9. Buscar" << endl;
+        
+        
+        
+        
+        
         cout << "0. Salir" << endl << "Opcion: ";
         cin >> op; cin.ignore();
 
@@ -30,6 +36,12 @@ int main(){
         
         switch(op){
             case 1:
+                cout << "Nombre: ";
+                getline(cin, nombre);
+                vj.setUsuario(nombre);
+                cout << "...Modificado";
+
+            case 2:
             {
                 Civilizacion c;
                 cin >> c; 
