@@ -28,11 +28,15 @@ int main(){
         cin >> op; cin.ignore();
 
         if(!op) break;
-        cout << endl;
+        cout << endl << endl;
 
         if(op >= 5 and op <= 11 and vj.total() <= 0){
             cout << "Aun no hay elementos";
             continue;
+        }
+
+        if(op == 8 and op == 9){
+            cout << "Hay " << vj.total() << " civilizaciones" << endl;
         }
         
         switch(op){
@@ -97,13 +101,13 @@ int main(){
                 if(op == 1){
                     vj.ordenarNombre();
                 }
-                if(op == 2){
+                else if(op == 2){
                     vj.ordenarX();
                 }
-                if(op == 3){
+                else if(op == 3){
                     vj.ordenarY();
                 }
-                if(op == 4){
+                else if(op == 4){
                     vj.ordenarPuntuacion();
                 }
                 else{
