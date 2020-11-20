@@ -117,6 +117,14 @@ void Videojuego::eliminaCiv(size_t pos){
     civs.erase(civs.begin() + pos);
 }
 
+Civilizacion Videojuego::getPrimerCiv(){
+    return civs.front();
+}
+
+Civilizacion Videojuego::getUltimaCiv(){
+    return civs.back();
+}
+
 void Videojuego::ordenarNombre(){
     sort(civs.begin(), civs.end(), [](Civilizacion c1, Civilizacion c2){return c1.getNombre() < c2.getNombre();});
 }

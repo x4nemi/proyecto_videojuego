@@ -6,33 +6,34 @@ int main(){
     int op;
     string nombre;
 
-    cout << "Nombre del nombre: ";
+    cout << "Nombre del usuario: ";
     getline(cin, nombre);
 
     Videojuego vj(nombre);   
 
     while(1){
-        cout << "\n\n1. Cambiar nombre del usuario" << "\t";
-        cout << "2. Agregar Civ" << "\t";
+        cout << "\n\nBienvenid@, " << nombre << "!" << endl;
+        cout << "1. Cambiar nombre del usuario" << "\t";
+        cout << "2. Agregar Civilizacion" << endl;
         cout << "3. Insertar" << "\t";
-        cout << "4. Inicializar" << endl;
+        cout << "4. Inicializar" << "\t";
         cout << "5. Primera Civ" << endl;
-        cout << "6. Ultima Civ";
+        cout << "6. Ultima Civ" << "\t";
         cout << "7. Ordenar" << "\t";
-        cout << "8. Eliminar" << "\t";
-        cout << "9. Buscar" << endl;
-        cout << "3. Respaldad" << endl;
-        cout << "4. Recuperar" << "\t";
-        
-        
-        
-        
-        
+        cout << "8. Eliminar" << endl;
+        cout << "9. Buscar" << "\t";
+        cout << "10. Modificar" << "\t";
+        cout << "11. Resumen" << endl;   
         cout << "0. Salir" << endl << "Opcion: ";
         cin >> op; cin.ignore();
 
         if(!op) break;
         cout << endl;
+
+        if(op >= 5 and op <= 11 and vj.total() <= 0){
+            cout << "Aun no hay elementos";
+            continue;
+        }
         
         switch(op){
             case 1:
@@ -40,27 +41,17 @@ int main(){
                 getline(cin, nombre);
                 vj.setUsuario(nombre);
                 cout << "...Modificado";
-
+                break;
             case 2:
             {
                 Civilizacion c;
                 cin >> c; 
                 vj.agregarCiv(c);
                 cin.ignore();
+                cout << "Agregado...";
             }
                 break;
-            case 2:
-                vj.mostrar();
-                break;
             case 3:
-                //vj.respaldar();
-                cout << "Respaldado";
-                break;
-            case 4:
-                //vj.recuperar();
-                cout << "Recuperado";
-                break;
-            case 5:
             {
                 size_t pos;
                 cout << "Posicion: ";
@@ -73,10 +64,10 @@ int main(){
                 Civilizacion c;
                 cin >> c; 
                 vj.insertarCiv(c, pos);
-                
+                cout << "Civilizacion insertada...";
             }
                 break;
-            case 6:
+            case 4:
             {
                 size_t tam;
                 cout << "Tamanio: ";
@@ -85,9 +76,43 @@ int main(){
                 Civilizacion c;
                 cin >> c;
                 vj.inicializa(c, tam);
+                cout << "Inicializada...";
             }
                 break;
+            case 5:
+                cout << "Primera Civilizacion: " << endl;
+                cout << vj.getPrimerCiv();
+                break;
+            case 6:
+                cout << "Ultima Civilizacion: " << endl;
+                cout << vj.getUltimaCiv();
+                break;
             case 7:
+                cout << "1. Ordenar por Nombre" << endl;
+                cout << "2. Ordenar por la posicion en X" << endl;
+                cout << "3. Ordenar por la posicion enY" << endl;
+                cout << "4. Ordenar por Puntuacion" << endl;
+                cin >> op;
+
+                if(op == 1){
+                    vj.ordenarNombre();
+                }
+                if(op == 2){
+                    vj.ordenarX();
+                }
+                if(op == 3){
+                    vj.ordenarY();
+                }
+                if(op == 4){
+                    vj.ordenarPuntuacion();
+                }
+                else{
+                    cout << "Opcion incorrecta";
+                    break;
+                }
+                cout << "Ordenada...";
+                break;
+            case 8:
             {
                 size_t pos;
                 cout << "Posicion: ";
@@ -101,18 +126,13 @@ int main(){
                 vj.eliminaCiv(pos);
             }
                 break;
-            case 8:
-                if(vj.total() == -1){
-                    cout << "No hay computadoras registradas";
-                    break;
-                }
-                vj.ordenarNombre();
-                cout << "Ordenado";
-                break;
             case 9:
             {
+                string cadena;
                 Civilizacion c;
-                cin >> c;
+                cout << "Nombre de la Civilizacion: ";
+                getline(cin, cadena);
+                c.setNombre(cadena);
 
                 Civilizacion* ptr = vj.buscarCiv(c);
                 if(ptr == nullptr){
@@ -121,11 +141,71 @@ int main(){
                 }
 
                 else{
+                    cout << "Primera civilizacion encontrada:" << endl;
                     cout << *ptr;
                 }
             }
+                break;
+            case 10:
+            {
+                string cadena;
+                Civilizacion c;
+                cout << "Nombre de la Civilizacion a modificar: ";
+                getline(cin, cadena);
+                c.setNombre(cadena);
 
+                Civilizacion* ptr = vj.buscarCiv(c);
+                if(ptr == nullptr){
+                    cout << "No encontrado" << endl;
+                    break;
+                }
+
+                else{
+                
+                    string cadena;
+                    int pos;
+                    float punt;
+                    cout << "Civilizacion a modificar:" << endl;
+                    cout << *ptr;
+
+                    cout << "1. Modificar Nombre" << endl;
+                    cout << "2. Modificar X" << endl;
+                    cout << "3. Modificar Y" << endl;
+                    cout << "4. Modificar Puntuacion" << endl;
+                    cout << "Opcion: ";
+                    cin >> op;
+
+                    if(op == 1){
+                        cout << "Nombre: ";
+                        getline(cin, cadena);
+                        ptr->setNombre(cadena);
+                    }
+                    if(op == 2){
+                        cout << "X: ";
+                        cin >> pos;
+                        ptr->setX(pos);
+                    }
+                    if(op == 3){
+                        cout << "Y: ";
+                        cin >> pos;
+                        ptr->setY(pos);
+                    }
+                    if(op == 4){
+                        cout << "Puntuacion: ";
+                        cin >> punt;
+                        ptr->setPuntuacion(punt);
+                    }
+                }
+            }
+                break;
+            case 11:
+                cout << "Resumen================" << endl;
+                vj.mostrar();
+                break;
+            default:
+                cout << "Opcion incorrecta";
         }
+
     }
     return 0;
 }
