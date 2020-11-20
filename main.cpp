@@ -128,6 +128,7 @@ int main(){
                 }
 
                 vj.eliminaCiv(pos);
+                cout << "Eliminado...";
             }
                 break;
             case 9:
