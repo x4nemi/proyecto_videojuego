@@ -22,7 +22,7 @@ void Videojuego::agregarCiv(const Civilizacion &c){
 
 void Videojuego::mostrar(){
     cout << left;
-    cout << setw(10) << "Nombre de la Civ";
+    cout << setw(20) << "Nombre de la Civ";
     cout << setw(5) << "X";
     cout << setw(5) << "Y";
     cout << setw(10) << "Puntuacion";

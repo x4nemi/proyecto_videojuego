@@ -23,7 +23,7 @@ void Civilizacion::setY(const int& y){
     this->y = y;
 }
 
-void Civilizacion::setPuntuacion(const int& p){
+void Civilizacion::setPuntuacion(const float& p){
     puntuacion = p;
 }
 

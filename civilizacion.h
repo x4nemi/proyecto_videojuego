@@ -23,7 +23,7 @@ class Civilizacion{
         void setNombre(const string&);
         void setX(const int&);
         void setY(const int&);
-        void setPuntuacion(const int&);
+        void setPuntuacion(const float&);
 
         string getNombre();
         int getX();
@@ -32,7 +32,7 @@ class Civilizacion{
 
         friend ostream& operator<<(ostream &out, const Civilizacion &c){
             out << left;
-            out << setw(18) << c.nombre;
+            out << setw(20) << c.nombre;
             out << setw(5) <<  c.x;
             out << setw(5) <<  c.y;
             out << setw(10) <<  c.puntuacion;
