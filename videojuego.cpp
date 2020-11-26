@@ -131,16 +131,16 @@ void Videojuego::ordenarNombre(){
 
 void Videojuego::ordenarX(){
     sort(civs.begin(), civs.end(),
-    [](Civilizacion c1, Civilizacion c2){return c1.getX() > c2.getX();});
+    [](Civilizacion c1, Civilizacion c2){return c1.getX() < c2.getX();});
 }
 void Videojuego::ordenarY(){
     sort(civs.begin(), civs.end(),
-    [](Civilizacion c1, Civilizacion c2){return c1.getY() > c2.getY();});
+    [](Civilizacion c1, Civilizacion c2){return c1.getY() < c2.getY();});
 }
 
 void Videojuego::ordenarPuntuacion(){
     sort(civs.begin(), civs.end(),
-    [](Civilizacion c1, Civilizacion c2){return c1.getPuntuacion() > c2.getPuntuacion();});
+    [](Civilizacion c1, Civilizacion c2){return c1.getPuntuacion() < c2.getPuntuacion();});
 }
 
 Civilizacion* Videojuego::buscarCiv(const Civilizacion &c){

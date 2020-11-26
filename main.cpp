@@ -12,7 +12,7 @@ int main(){
     Videojuego vj(nombre);   
 
     while(1){
-        cout << "=============================================" << endl;
+        cout << "==================================================================" << endl;
         cout << "Bienvenid@, " << nombre << "!" << endl;
         cout << "1. Cambiar nombre del usuario" << "\t";
         cout << "2. Agregar Civilizacion" << endl;
