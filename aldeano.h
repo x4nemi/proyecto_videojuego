@@ -5,24 +5,26 @@
 #include <string>
 #include <iomanip>
 
+using namespace std;
+
 class Aldeano{
     private:
-        std::string nombre;
+        string nombre;
         size_t edad;
-        std::string genero;
+        string genero;
         float salud;
     public:
         Aldeano() {}
-        Aldeano(const std::string&, size_t, const std::string&, const float&);
+        Aldeano(const string&, size_t, const string&, const float&);
 
-        void setNombre(const std::string&);
+        void setNombre(const string&);
         void setEdad(size_t);
-        void setGenero(const std::string&);
+        void setGenero(const string&);
         void setSalud(const float&);
 
-        std::string getNombre();
+        string getNombre();
         size_t getEdad();
-        std::string getGenero();
+        string getGenero();
         float getSalud();
 
         friend ostream& operator << (ostream &out, const Aldeano& a){
@@ -39,7 +41,7 @@ class Aldeano{
             cout << "Nombre: ";
             getline(cin, a.nombre);
             cout << "Edad: ";
-            cin >> a.edad;
+            cin >> a.edad; cin.ignore();
             cout << "Genero: ";
             getline(cin, a.genero);
             cout << "Salud: ";

@@ -44,6 +44,10 @@ class Civilizacion{
         void ordenarEdad();
         void ordenarSalud();
 
+        Aldeano* buscar(const Aldeano&);
+
+        bool vacia();
+
         void print();
 
         friend ostream& operator<<(ostream &out, const Civilizacion &c){

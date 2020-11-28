@@ -46,15 +46,23 @@ float Civilizacion::getPuntuacion(){
 //Aldeanos
 void Civilizacion::agregarFinal(const Aldeano& a){
     aldeanos.push_back(a);
+    puntuacion += 100;
 }
 
 void Civilizacion::agregarInicio(const Aldeano& a){
     aldeanos.push_front(a);
+    puntuacion += 100;
 }
 
 void Civilizacion::print(){
+    cout << left << "\t";
+    cout << setw(15) << "Nombre";
+    cout << setw(10) << "Edad";
+    cout << setw(15) << "Genero";
+    cout << setw(10) << "Salud";
+    cout << endl;
     for(auto it = aldeanos.begin(); it != aldeanos.end(); it++){
-        cout << *it << endl;
+        cout << "\t" << *it << endl;
     }
 }
 
@@ -78,7 +86,7 @@ void Civilizacion::eliminarEdad(){
 }
 
 void Civilizacion::eliminarSalud(const float& x){
-    aldeanos.remove_if([x](Aldeano &a){ return a.getSalud() >= x;});
+    aldeanos.remove_if([x](Aldeano &a){ return a.getSalud() <= x;});
 }
 
 void Civilizacion::ordenarNombre(){
@@ -95,4 +103,17 @@ void Civilizacion::ordenarEdad(){
 
 void Civilizacion::ordenarSalud(){
     aldeanos.sort([](Aldeano &a, Aldeano &b){return a.getSalud() > b.getSalud();});
+}
+
+
+Aldeano* Civilizacion::buscar(const Aldeano& a){
+    auto it = find(aldeanos.begin(), aldeanos.end(), a);
+    if(it == aldeanos.end()){
+        return nullptr;
+    }
+    else return &(*it);
+}
+
+bool Civilizacion::vacia(){
+    return aldeanos.empty();
 }

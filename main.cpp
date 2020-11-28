@@ -1,4 +1,5 @@
 #include "videojuego.h"
+#include "submenu.h"
 
 using namespace std;
 
@@ -155,6 +156,10 @@ int main(){
                     cout << setw(10) << "Puntuacion";
                     cout << endl;
                     cout << *ptr;
+
+                    Civilizacion &c = *ptr;
+                    
+                    subMenu(c);
                 }
             }
                 break;
