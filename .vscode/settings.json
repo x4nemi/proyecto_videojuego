@@ -1,4 +1,7 @@
 {
     "editor.fontFamily": "Monaco",
+    "files.associations": {
+        "iostream": "cpp"
+    },
     
 }

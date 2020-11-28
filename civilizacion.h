@@ -4,9 +4,9 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <iostream>
-#include <iomanip>
 #include <fstream>
+#include <list>
+#include "aldeano.h"
 
 using namespace std;
 
@@ -16,6 +16,8 @@ class Civilizacion{
         int x;
         int y;
         float puntuacion;
+
+        list<Aldeano> aldeanos;
     public:
         Civilizacion();
         Civilizacion(const string&, const int&, const int&, const float&);
@@ -29,6 +31,20 @@ class Civilizacion{
         int getX();
         int getY();
         float getPuntuacion();
+
+        //Aldeanos--------------------------
+        void agregarFinal(const Aldeano&);
+        void agregarInicio(const Aldeano&);
+
+        void eliminarNombre(const string&);
+        void eliminarEdad(); //eliminar >= 60
+        void eliminarSalud(const float&);
+
+        void ordenarNombre();
+        void ordenarEdad();
+        void ordenarSalud();
+
+        void print();
 
         friend ostream& operator<<(ostream &out, const Civilizacion &c){
             out << left;
