@@ -7,6 +7,8 @@ int main(){
     int op;
     string nombre;
 
+    bool flagRecupera = 0;
+
     cout << "Nombre del usuario: ";
     getline(cin, nombre);
 
@@ -25,20 +27,30 @@ int main(){
         cout << "8. Eliminar" << endl;
         cout << "9. Buscar" << "\t";
         cout << "10. Modificar" << "\t";
-        cout << "11. Resumen" << endl;   
+        cout << "11. Resumen" << endl;
+        cout << "12. Respaldar\t";
+        cout << "13. Recuperar\t";
         cout << "0. Salir" << endl << "Opcion: ";
         cin >> op; cin.ignore();
 
         if(!op) break;
         cout << endl << endl;
 
-        if(op >= 5 and op <= 11 and vj.total() <= 0){
+        if(op >= 5 and op <= 12 and vj.total() <= 0){
             cout << "Aun no hay elementos";
             continue;
         }
 
         if(op == 8 or op == 3){
             cout << "Hay " << vj.total() << " civilizaciones" << endl;
+        }
+
+        if(op == 13){
+            ifstream f("civilizaciones.txt");
+            if (!f.good()){
+                cout << "Aun no se ha respaldado" << endl;
+                continue;
+            }
         }
         
         switch(op){
@@ -226,6 +238,13 @@ int main(){
             case 11:
                 cout << "**Resumen**" << endl;
                 vj.mostrar();
+                break;
+            case 12:
+                flagRecupera = 1;
+                vj.respaldarCivs();
+                break;
+            case 13:
+                vj.recuperaCivs();
                 break;
             default:
                 cout << "Opcion incorrecta";

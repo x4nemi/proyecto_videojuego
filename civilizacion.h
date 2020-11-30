@@ -48,6 +48,9 @@ class Civilizacion{
 
         bool vacia();
 
+        void respaldarAldeanos();
+        void recuperaAldeanos();
+
         void print();
 
         friend ostream& operator<<(ostream &out, const Civilizacion &c){

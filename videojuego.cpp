@@ -155,3 +155,54 @@ Civilizacion* Videojuego::buscarCiv(const Civilizacion &c){
         return &(*it);
     }
 }
+
+void Videojuego::respaldarCivs(){
+    //se va a crear un archivo txt con los nombres de las civs
+    //y cada que se agregue una civ, se respaldarán sus aldeanos
+    ofstream archivo("civilizaciones.txt", ios::out);
+
+    for (int i = 0; i < civs.size(); ++i) {
+        Civilizacion &c = civs[i];
+        archivo << c.getNombre() << endl;
+        archivo << c.getX() << endl;
+        archivo << c.getY() << endl;
+        archivo << c.getPuntuacion() << endl;
+        c.respaldarAldeanos();
+    }
+    archivo.close();
+}
+
+void Videojuego::recuperaCivs(){
+    ifstream archivo("civilizaciones.txt");
+
+    if(archivo.is_open()){
+        string aux;
+        int xy;
+        float p;
+        Civilizacion c;
+
+        while(true){
+            getline(archivo, aux);
+            if(archivo.eof()) break;
+            c.setNombre(aux);
+
+            getline(archivo, aux);
+            xy = stoi(aux);
+            c.setX(xy);
+
+            getline(archivo, aux);
+            xy = stoi(aux);
+            c.setY(xy);
+
+            getline(archivo, aux);
+            p = stof(aux);
+            c.setPuntuacion(p);
+
+            c.recuperaAldeanos();
+
+            agregarCiv(c);
+        }
+    }
+
+    archivo.close();
+}
