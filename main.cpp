@@ -239,9 +239,11 @@ int main(){
                 break;
             case 12:
                 vj.respaldarCivs();
+                cout << "Respaldado...";
                 break;
             case 13:
                 vj.recuperaCivs();
+                cout << "Recuperado...";
                 break;
             default:
                 cout << "Opcion incorrecta";
