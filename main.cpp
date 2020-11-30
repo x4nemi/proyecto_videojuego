@@ -7,8 +7,6 @@ int main(){
     int op;
     string nombre;
 
-    bool flagRecupera = 0;
-
     cout << "Nombre del usuario: ";
     getline(cin, nombre);
 
@@ -240,7 +238,6 @@ int main(){
                 vj.mostrar();
                 break;
             case 12:
-                flagRecupera = 1;
                 vj.respaldarCivs();
                 break;
             case 13:
