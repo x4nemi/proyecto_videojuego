@@ -35,7 +35,7 @@ int main(){
         cout << endl << endl;
 
         if(op >= 5 and op <= 12 and vj.total() <= 0){
-            cout << "Aun no hay elementos";
+            cout << "Aun no hay elementos" << endl << endl;
             continue;
         }
 
@@ -46,7 +46,7 @@ int main(){
         if(op == 13){
             ifstream f("civilizaciones.txt");
             if (!f.good()){
-                cout << "Aun no se ha respaldado" << endl;
+                cout << "Aun no se ha respaldado" << endl << endl;
                 continue;
             }
         }
