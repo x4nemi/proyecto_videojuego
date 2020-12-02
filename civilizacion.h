@@ -30,7 +30,7 @@ class Civilizacion{
         string getNombre();
         int getX();
         int getY();
-        float getPuntuacion();
+        float getPuntuacion() const;
 
         //Aldeanos--------------------------
         void agregarFinal(const Aldeano&);

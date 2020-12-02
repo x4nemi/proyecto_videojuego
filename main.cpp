@@ -139,7 +139,7 @@ int main(){
                     break;
                 }
 
-                vj.eliminaCiv(pos + 1);
+                vj.eliminaCiv(pos - 1);
                 cout << "Eliminado...";
             }
                 break;

@@ -16,7 +16,7 @@ string Videojuego::getUsuario(){
     return usuario;
 }
 
-void Videojuego::agregarCiv(const Civilizacion &c){
+void Videojuego::agregarCiv(const Civilizacion c){
     civs.push_back(c);
 }
 
@@ -101,7 +101,7 @@ void Videojuego::recuperar()
     archivo.close();
 }*/
 
-void Videojuego::insertarCiv(const Civilizacion &c, size_t pos){
+void Videojuego::insertarCiv(const Civilizacion c, size_t pos){
     civs.insert(civs.begin() + pos, c);
 }
 
@@ -157,52 +157,53 @@ Civilizacion* Videojuego::buscarCiv(const Civilizacion &c){
 }
 
 void Videojuego::respaldarCivs(){
-    //se va a crear un archivo txt con los nombres de las civs
-    //y cada que se agregue una civ, se respaldarán sus aldeanos
-    ofstream archivo("civilizaciones.txt", ios::out);
-
-    for (int i = 0; i < civs.size(); ++i) {
-        Civilizacion &c = civs[i];
-        archivo << c.getNombre() << endl;
-        archivo << c.getX() << endl;
-        archivo << c.getY() << endl;
-        archivo << c.getPuntuacion() << endl;
-        c.respaldarAldeanos();
+    ofstream archivo("civilizaciones.txt", ios::out); //Se crea y abre el archivo
+    if (archivo.is_open()) {
+        for (int i = 0; i < total(); ++i) {
+            if (i == total() - 1) {
+                archivo << civs[i].getNombre() << endl;
+                archivo << civs[i].getX() << endl;
+                archivo << civs[i].getY() << endl;
+                archivo << civs[i].getPuntuacion();
+                civs[i].respaldarAldeanos();
+                break;
+            }
+            archivo << civs[i].getNombre() << endl;
+            archivo << civs[i].getX() << endl;
+            archivo << civs[i].getY() << endl;
+            archivo << civs[i].getPuntuacion() << endl;
+            civs[i].respaldarAldeanos();
+        }
+        archivo.close();
     }
-    archivo.close();
+    else {
+        cout << "No se pudo abrir el archivo, respaldar Civilizaciones" << endl;
+    }
+
 }
 
-void Videojuego::recuperaCivs(){
+void Videojuego::recuperaCivs() {
     ifstream archivo("civilizaciones.txt");
-
-    if(archivo.is_open()){
-        string aux;
-        int xy;
-        float p;
-        Civilizacion c;
-
-        while(true){
-            getline(archivo, aux);
-            if(archivo.eof()) break;
-            c.setNombre(aux);
-
-            getline(archivo, aux);
-            xy = stoi(aux);
-            c.setX(xy);
-
-            getline(archivo, aux);
-            xy = stoi(aux);
-            c.setY(xy);
-
-            getline(archivo, aux);
-            p = stof(aux);
-            c.setPuntuacion(p);
-
-            c.recuperaAldeanos();
-
-            agregarCiv(c);
-        }
+    if (!archivo.is_open()) {
+        cout << "No se pudo abrir el archivo, recuperar civilizaciones" << endl;
+        return;
     }
-
-    archivo.close();
+    else {
+        Civilizacion* aux;
+        string auxstr;
+        while (!archivo.eof()) {
+            aux = new Civilizacion();
+            getline(archivo, auxstr);
+            aux->setNombre(auxstr);
+            getline(archivo, auxstr);
+            aux->setX(atoi(auxstr.c_str()));
+            getline(archivo, auxstr);
+            aux->setY(atoi(auxstr.c_str()));
+            getline(archivo, auxstr);
+            aux->recuperaAldeanos();
+            aux->setPuntuacion(atof(auxstr.c_str()));
+            agregarCiv(*aux);
+        }
+        archivo.close();
+    }
 }

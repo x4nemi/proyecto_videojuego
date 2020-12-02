@@ -43,10 +43,10 @@ void subMenu(Civilizacion &c){
 
             if(opc == "a"){
                 c.agregarInicio(a);
+                cout << "Aldeano agregado...";
             }
             else if(opc == "b"){
                 c.agregarFinal(a);
-                c.setPuntuacion(100.0);
                 cout << "Aldeano agregado...";
             }
             else{

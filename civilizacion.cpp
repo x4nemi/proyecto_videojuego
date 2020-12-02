@@ -12,7 +12,7 @@ Civilizacion::Civilizacion(const std::string& n, const int& x, const int& y, con
 }
 
 void Civilizacion::setNombre(const std::string& n){
-    nombre = n;
+    this->nombre = n;
 }
 
 void Civilizacion::setX(const int& x){
@@ -31,7 +31,7 @@ string Civilizacion::getNombre(){
     return nombre;
 }
 
-int Civilizacion::getX(){
+int Civilizacion::getX() {
     return x;
 }
 
@@ -39,19 +39,19 @@ int Civilizacion::getY(){
     return y;
 }
 
-float Civilizacion::getPuntuacion(){
+float Civilizacion::getPuntuacion() const{
     return puntuacion;
 }
 
 //Aldeanos
 void Civilizacion::agregarFinal(const Aldeano& a){
     aldeanos.push_back(a);
-    puntuacion += 100;
+    setPuntuacion(puntuacion + 100.0);
 }
 
 void Civilizacion::agregarInicio(const Aldeano& a){
     aldeanos.push_front(a);
-    puntuacion += 100;
+    setPuntuacion(puntuacion + 100.0);
 }
 
 void Civilizacion::print(){
@@ -118,50 +118,46 @@ bool Civilizacion::vacia(){
     return aldeanos.empty();
 }
 
-void Civilizacion::respaldarAldeanos(){
-    //crea un archivo txt llamado como la civilización 
-    //y guarda a los aldeanos con sus datos
-    ofstream aldeanoss(getNombre() + ".txt", ios::out);
-    
-    for (auto it = aldeanos.begin(); it != aldeanos.end(); ++it) {
-        Aldeano &aldeano = *it; 
-        aldeanoss << aldeano.getNombre() << endl;
-        aldeanoss << aldeano.getEdad()   << endl;
-        aldeanoss << aldeano.getGenero() << endl;
-        aldeanoss << aldeano.getSalud()  << endl;
-
+void Civilizacion::respaldarAldeanos()
+{
+    ofstream archivo(getNombre() + ".txt", ios::out);//Se crea el objeto archivo con el nombre de la civilizacion
+    if (archivo.is_open()) {
+        for (auto it = aldeanos.begin(); it != aldeanos.end(); ++it) {//Se recorre toda la lista de aldeanos
+            Aldeano& aldeano = *it;
+            archivo << aldeano.getNombre() << endl;
+            archivo << aldeano.getEdad() << endl;
+            archivo << aldeano.getGenero() << endl;
+            archivo << aldeano.getSalud() << endl;
+        }
+        archivo.close();//Se cierra el arcivo
     }
-    aldeanoss.close();
+    else {
+        cout << "No se pudo abrir el archivo, Respaldar_aldeanos" << endl;
+    }
 }
 
 void Civilizacion::recuperaAldeanos(){
     ifstream archivo(getNombre() + ".txt");
-
-    if(archivo.is_open()){
-        string aux;
-        size_t edad;
-        float salud;
-        Aldeano a;
-
-        while(true){
-            getline(archivo, aux);
-            if(archivo.eof()) break;
-
-            a.setNombre(aux);
-
-            getline(archivo, aux);
-            edad = stoi(aux);
-            a.setEdad(edad);
-
-            getline(archivo, aux);
-            a.setGenero(aux);
-
-            getline(archivo, aux);
-            cout << aux;
-            salud = stof(aux);
-            a.setSalud(salud);
-
-            agregarFinal(a);
+    if (!archivo.is_open()) {
+        cout << "No se pudo abrir el archivo, recuperar aldeanos" << endl;
+        return;
+    }
+    else {
+        Aldeano* aux = nullptr;
+        string auxstr;
+        while (!archivo.eof()) {
+            aux = new Aldeano();
+            getline(archivo, auxstr);
+            aux->setNombre(auxstr);
+            getline(archivo, auxstr);
+            aux->setEdad(atoi(auxstr.c_str()));
+            getline(archivo, auxstr);
+            aux->setGenero(auxstr.c_str());
+            getline(archivo, auxstr);
+            aux->setSalud(atof(auxstr.c_str()));
+            agregarFinal(*aux);
         }
+        aldeanos.pop_back();
+        archivo.close();
     }
 }

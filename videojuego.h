@@ -17,8 +17,8 @@ class Videojuego{
         void setUsuario(const string&);
         string getUsuario();
 
-        void agregarCiv(const Civilizacion&);
-        void insertarCiv(const Civilizacion&, size_t);
+        void agregarCiv(const Civilizacion);
+        void insertarCiv(const Civilizacion, size_t);
         void inicializa(const Civilizacion&, size_t);
 
         Civilizacion getPrimerCiv();
