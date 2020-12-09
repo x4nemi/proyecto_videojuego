@@ -158,6 +158,7 @@ int main(){
                 }
 
                 else{
+                    bool x;
                     cout << "Primera civilizacion encontrada:" << endl;
                     cout << left;
                     cout << setw(20) << "Nombre de la Civ";
@@ -168,8 +169,14 @@ int main(){
                     cout << *ptr;
 
                     Civilizacion &c = *ptr;
-                    
-                    subMenu(c);
+
+                    cout << "Menu de Barcos (1) o Menu de Aldeanos (0): ";
+                    cin >> x;
+
+                    cout << endl;
+
+                    if(x) c.menuCiv();
+                    else subMenu(c);
                 }
             }
                 break;

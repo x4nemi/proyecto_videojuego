@@ -7,6 +7,7 @@
 #include <fstream>
 #include <list>
 #include "aldeano.h"
+#include "barco.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ class Civilizacion{
         float puntuacion;
 
         list<Aldeano> aldeanos;
+        list<Barco*> puerto;
     public:
         Civilizacion();
         Civilizacion(const string&, const int&, const int&, const float&);
@@ -45,6 +47,15 @@ class Civilizacion{
         void ordenarSalud();
 
         Aldeano* buscar(const Aldeano&);
+
+        //Barcos--------------------------------
+        void agregarBarco(Barco*);
+        void capturarBarco();
+        void mostrarBarcos();
+        Barco* buscarBarco(const string&);
+        void eliminarID(const string&);
+        void eliminarCombX(const float&);
+        void menuCiv();
 
         bool vacia();
 
